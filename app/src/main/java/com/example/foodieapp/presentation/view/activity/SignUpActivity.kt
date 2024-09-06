@@ -58,10 +58,12 @@ class SignUpActivity : AppCompatActivity() {
             val phone = editTextPhone.text.toString()
             val password = editTextPassword.text.toString()
             val passwordReconfirm = editTextPasswordReconfirm.text.toString()
+            // Check if input field is blank
             if (name.isBlank() || address.isBlank() || email.isBlank() || phone.isBlank() || password.isBlank() || passwordReconfirm.isBlank()) {
                 ToastUtils.showToast(this@SignUpActivity, "Please fill all the information")
                 return@setOnClickListener
             }
+            // check if reconfirm password does not match
             if (passwordReconfirm != password) {
                 ToastUtils.showToast(this@SignUpActivity, "Reconfirm password does not match")
                 return@setOnClickListener
