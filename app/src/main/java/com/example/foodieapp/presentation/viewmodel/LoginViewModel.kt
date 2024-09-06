@@ -24,7 +24,7 @@ class LoginViewModel: ViewModel() {
     fun login(email: String, password: String) {
         loadingLiveData.value = true
         viewModelScope.launch {
-            repository.requestSignIn(email, password, object : AppInterface.OnListenResponse<UserDTO> {
+            repository.requestLogIn(email, password, object : AppInterface.OnListenResponse<UserDTO> {
                 override fun onFail(message: String) {
                     userLiveData.postValue(AppResource.Error(message))
                     loadingLiveData.value = false

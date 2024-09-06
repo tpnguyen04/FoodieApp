@@ -93,7 +93,7 @@
             android:id="@+id/sign_in_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="Log In"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -108,7 +108,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_sign_in"
         app:layout_constraintVertical_bias="0.85"
-        tools:text="Don't have an account?Register" />
+        tools:text="Don't have an account? Sign up here" />
 
     <include
         android:id="@+id/layout_loading"

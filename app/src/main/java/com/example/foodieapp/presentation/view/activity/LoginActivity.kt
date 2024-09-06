@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.foodieapp.R
 import com.example.foodieapp.data.api.AppResource
@@ -63,15 +64,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observeData() {
         viewModel.getLoading().observe(this) {
-
+            layoutLoading.isVisible = it
         }
 
         viewModel.getUser().observe(this) {
             when(it) {
                 is AppResource.Success -> {
-                    ToastUtils.showToast(this, "Login Success")
+                    ToastUtils.showToast(this, "Login Success!")
                 }
-
                 is AppResource.Error -> {
                     ToastUtils.showToast(this, it.error)
                 }
@@ -86,16 +86,16 @@ class LoginActivity : AppCompatActivity() {
         textViewRegister = findViewById(R.id.text_view_register)
         layoutLoading = findViewById(R.id.layout_loading)
 
-        displayTextViewRegister()
+        displayTextViewSignUp()
     }
 
-    private fun displayTextViewRegister() {
+    private fun displayTextViewSignUp() {
         SpannableStringBuilder().apply {
             append("Don't have an account? ")
             append(SpannedUtils.setClickColorLink(
                 text = "Sign up here",
                 context = this@LoginActivity,
-                onListenClick = onClickRegister
+                onListenClick = onClickSignUp
             ))
             textViewRegister.text = this
             textViewRegister.highlightColor = Color.TRANSPARENT
@@ -103,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private var onClickRegister =  {
+    private var onClickSignUp =  {
         startActivity(Intent(this@LoginActivity, SignUpActivity::class.java))
     }
 }

@@ -18,7 +18,7 @@ object AuthenticationRepository {
         RetrofitClient.getApiService()
     }
 
-    fun requestSignIn(
+    fun requestLogIn(
         email: String,
         password: String,
         onListenResponse: AppInterface.OnListenResponse<UserDTO>
@@ -28,7 +28,7 @@ object AuthenticationRepository {
                 put("email", email)
                 put("password", password)
             }
-            apiService.signIn(hashMap).enqueue(object : Callback<AppResponseDTO<UserDTO>>{
+            apiService.logIn(hashMap).enqueue(object : Callback<AppResponseDTO<UserDTO>>{
                 override fun onFailure(call: Call<AppResponseDTO<UserDTO>>, t: Throwable) {
                     onListenResponse.onFail(t.message.toString())
                 }
@@ -47,6 +47,45 @@ object AuthenticationRepository {
                     }
                 }
             })
+        }
+    }
+
+    fun requestSignUp(
+        email: String,
+        password: String,
+        name: String,
+        phone: String,
+        address: String,
+        onListenResponse: AppInterface.OnListenResponse<UserDTO>
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val hashMap = HashMap<String, Any>().apply {
+                put("email", email)
+                put("password", password)
+                put("name", name)
+                put("phone", phone)
+                put("address", address)
+            }
+
+            apiService.signUp(hashMap).enqueue(object: Callback<AppResponseDTO<UserDTO>> {
+                override fun onFailure(call: Call<AppResponseDTO<UserDTO>>, t: Throwable) {
+                    onListenResponse.onFail(t.message.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<AppResponseDTO<UserDTO>>,
+                    response: Response<AppResponseDTO<UserDTO>>
+                ) {
+                    if(response.isSuccessful && response.body() != null) {
+                        onListenResponse.onSuccess(response.body()?.data)
+                    } else if (response.errorBody() != null && StatusCodeType.hasCodeError(response.code())) {
+                       val json = JSONObject(response.errorBody()?.string() ?: "{}")
+                        val errorMessage = json.optString("message")
+                        onListenResponse.onFail(errorMessage)
+                    }
+                }
+            })
+
         }
     }
 }
