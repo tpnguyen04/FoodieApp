@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                 ToastUtils.showToast(this, "Please fill in email & password")
                 return@setOnClickListener
             }
-            viewModel.login(email, password)
+            viewModel.login(this@LoginActivity,email, password)
         }
 
     }

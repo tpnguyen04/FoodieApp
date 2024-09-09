@@ -1,10 +1,13 @@
 package com.example.foodieapp.presentation.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.foodieapp.common.AppCommon
 import com.example.foodieapp.common.AppInterface
+import com.example.foodieapp.common.AppSharedPreferences
 import com.example.foodieapp.data.api.AppResource
 import com.example.foodieapp.data.api.dto.UserDTO
 import com.example.foodieapp.data.model.User
@@ -21,7 +24,7 @@ class LoginViewModel: ViewModel() {
 
     private val repository = AuthenticationRepository
 
-    fun login(email: String, password: String) {
+    fun login(context: Context, email: String, password: String) {
         loadingLiveData.value = true
         viewModelScope.launch {
             repository.requestLogIn(email, password, object : AppInterface.OnListenResponse<UserDTO> {
@@ -32,6 +35,9 @@ class LoginViewModel: ViewModel() {
 
                 override fun onSuccess(data: UserDTO?) {
                     val user = UserHelper.convertToUser(data)
+                    user?.token.let {
+                        AppSharedPreferences.saveData(context, AppCommon.KEY_TOKEN, it.toString())
+                    }
                     userLiveData.postValue(AppResource.Success(user))
                     loadingLiveData.value = false
                 }
