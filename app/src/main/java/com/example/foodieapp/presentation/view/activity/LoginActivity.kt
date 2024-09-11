@@ -71,6 +71,8 @@ class LoginActivity : AppCompatActivity() {
             when(it) {
                 is AppResource.Success -> {
                     ToastUtils.showToast(this, "Login Success!")
+                    startActivity(Intent(this@LoginActivity, ProductActivity::class.java))
+                    finish()
                 }
                 is AppResource.Error -> {
                     ToastUtils.showToast(this, it.error)
