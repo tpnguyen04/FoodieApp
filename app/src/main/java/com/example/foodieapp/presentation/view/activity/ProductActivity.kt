@@ -2,7 +2,11 @@ package com.example.foodieapp.presentation.view.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -23,6 +27,8 @@ class ProductActivity : AppCompatActivity() {
     private var layoutLoading: LinearLayout? = null
     private var productRecyclerView: RecyclerView? = null
     private var toolbar: Toolbar? = null
+    private var cartItemArea: FrameLayout? = null
+    private var textBadge: TextView? = null
 
     private val productAdapter: ProductAdapter by lazy {
         ProductAdapter(this@ProductActivity)
@@ -82,5 +88,25 @@ class ProductActivity : AppCompatActivity() {
     @SuppressLint("UseSupportActionBar")
     private fun mapView() {
         setSupportActionBar(toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_product, menu)
+        val rootView = menu?.findItem(R.id.item_menu_cart)?.actionView
+        cartItemArea = rootView?.findViewById(R.id.frame_layout_cart_area)
+        textBadge = rootView?.findViewById(R.id.text_cart_badge)
+
+        cartItemArea?.setOnClickListener {
+            ToastUtils.showToast(this@ProductActivity, "Click icon cart")
+        }
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.item_menu_order_history -> ToastUtils.showToast(this@ProductActivity, "Click icon history")
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

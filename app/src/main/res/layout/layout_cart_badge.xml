@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout_cart_area"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:focusable="true"
+    android:paddingEnd="5dp">
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_store" />
+
+    <TextView
+        android:id="@+id/text_cart_badge"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="right|end|top"
+        android:layout_marginEnd="-5dp"
+        android:background="@drawable/background_badge"
+        android:gravity="center"
+        android:padding="3dp"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:visibility="gone"
+        tools:text="0"
+        tools:visibility="visible" />
+
+</FrameLayout>
