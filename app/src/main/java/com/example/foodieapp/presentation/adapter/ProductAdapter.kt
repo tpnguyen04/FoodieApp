@@ -1,5 +1,6 @@
 package com.example.foodieapp.presentation.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -19,9 +20,11 @@ class ProductAdapter(
 
     private var listProduct: List<Product?> = emptyList()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setListProduct(listProduct: List<Product?>) {
         if (listProduct.isEmpty()) return
         this.listProduct = listProduct
+        notifyDataSetChanged()
     }
 
     inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
