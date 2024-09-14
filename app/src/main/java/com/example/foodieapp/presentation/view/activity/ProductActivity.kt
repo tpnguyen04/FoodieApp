@@ -1,6 +1,7 @@
 package com.example.foodieapp.presentation.view.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -104,6 +105,7 @@ class ProductActivity : AppCompatActivity() {
     @SuppressLint("UseSupportActionBar")
     private fun mapView() {
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -113,7 +115,7 @@ class ProductActivity : AppCompatActivity() {
         textBadge = rootView?.findViewById(R.id.text_cart_badge)
 
         cartItemArea?.setOnClickListener {
-            ToastUtils.showToast(this@ProductActivity, "Click icon cart")
+            startActivity(Intent(this@ProductActivity, CartActivity::class.java))
         }
 
         return super.onCreateOptionsMenu(menu)

@@ -41,31 +41,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:ellipsize="end"
-            android:maxLines="1"
+            android:maxLines="2"
             android:paddingLeft="5dp"
             android:textColor="#f20"
+            tools:text="A Chảy - Mì Sủi Cảo &amp; Cơm Chiên Gà Xối Mỡ - Shop Online"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/text_view_product_address"
+            app:layout_constraintBottom_toTopOf="@id/text_view_product_price"
             app:layout_constraintLeft_toRightOf="@id/card_view_product"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread_inside" />
 
-        <TextView
-            android:id="@+id/text_view_product_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingLeft="5dp"
-            android:textColor="#8A8A8A"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@id/text_view_product_price"
-            app:layout_constraintLeft_toRightOf="@id/card_view_product"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_product_name" />
 
         <TextView
             android:id="@+id/text_view_product_price"
@@ -74,59 +61,80 @@
             android:layout_marginStart="5dp"
             android:ellipsize="end"
             android:maxLines="1"
+            tools:text="Giá: 10,000 VND"
             android:paddingLeft="5dp"
             android:textColor="#040404"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@id/button_area_event"
             app:layout_constraintLeft_toRightOf="@id/card_view_product"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_product_address" />
+            app:layout_constraintTop_toBottomOf="@id/text_view_product_name" />
 
         <LinearLayout
             android:id="@+id/button_area_event"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/card_view_product"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_view_icon_delete"
+            app:layout_constraintStart_toEndOf="@id/card_view_product"
             app:layout_constraintTop_toBottomOf="@id/text_view_product_price">
 
             <LinearLayout
-                android:id="@+id/button_add_product"
-                android:layout_width="wrap_content"
+                android:id="@+id/button_subtract_product"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/background_button_corner_primary"
+                android:background="@drawable/background_button_square_corner_primary"
                 android:gravity="center"
-                android:paddingHorizontal="20dp"
                 android:paddingVertical="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:text="Add"
-                    android:textColor="@color/white" />
+                    android:src="@drawable/ic_subtract"
+                    app:tint="@color/white" />
             </LinearLayout>
 
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:background="@drawable/border"
+                android:gravity="center"
+                tools:text="2"
+                android:textSize="22sp" />
 
             <LinearLayout
-                android:id="@+id/button_detail_product"
-                android:layout_width="wrap_content"
+                android:id="@+id/button_add_product"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_button_corner_purple"
-                android:paddingHorizontal="20dp"
+                android:background="@drawable/background_button_square_corner_primary"
+                android:gravity="center"
                 android:paddingVertical="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
-                    android:text="Detail"
-                    android:textColor="@color/white" />
+                    android:src="@drawable/ic_add"
+                    app:tint="@color/white" />
+
             </LinearLayout>
+
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/image_view_icon_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_delete"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_product_price"
+            app:tint="@color/black" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

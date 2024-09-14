@@ -9,11 +9,10 @@
     android:paddingEnd="5dp">
 
     <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_store" />
+        android:src="@drawable/ic_cart" />
 
     <TextView
         android:id="@+id/text_cart_badge"
