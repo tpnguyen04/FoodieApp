@@ -123,7 +123,7 @@ class ProductActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.item_menu_order_history -> ToastUtils.showToast(this@ProductActivity, "Click icon history")
+            R.id.item_menu_order_history -> startActivity(Intent(this@ProductActivity, HistoryActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
