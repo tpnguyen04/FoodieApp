@@ -20,7 +20,7 @@
         >
 
         <TextView
-            android:id="@+id/text_view_number"
+            android:id="@+id/text_view_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="1"
@@ -40,13 +40,13 @@
             tools:text="17:52:29, 23/11/2024"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/text_view_total_price"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_unit_price"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/text_view_number"
+            app:layout_constraintStart_toEndOf="@+id/text_view_title"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_total_price"
+            android:id="@+id/text_view_unit_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="110,000 VND"

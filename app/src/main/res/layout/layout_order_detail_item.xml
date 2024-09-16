@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/background_button_square_corner_black_grey_stroke"
+        >
+
+        <TextView
+            android:id="@+id/text_view_order_detail_item_product"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="16sp"
+            android:padding="5dp"
+            tools:text="A Chảy - Mì Sủi Cảo &amp; Cơm Chiên Gà Xối Mỡ - Shop Online" />
+
+        <TextView
+            android:id="@+id/text_view_order_detail_item_quantity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            tools:text="2"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="5dp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/text_view_order_detail_item_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="110,000"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="5dp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/text_view_order_detail_item_total"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="220,000"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="5dp"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

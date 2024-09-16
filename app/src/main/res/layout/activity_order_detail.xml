@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Your Order History"
+            android:text="Your Order Detail"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -101,61 +101,119 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/text_view_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Number"
-                android:textSize="20sp"
+                tools:text="Order detail"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/text_view_time"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/text_view_time"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Time"
-                android:textSize="20sp"
+                tools:text="17:52:29 - 23/11/2024"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/text_view_unit_price"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/text_view_title"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_title" />
 
             <TextView
-                android:id="@+id/text_view_unit_price"
-                android:layout_width="wrap_content"
+                android:id="@+id/text_view_total_order_price"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Total Price"
-                android:textSize="20sp"
+                android:background="@drawable/background_button_rounded_corner_black_stroke"
+                tools:text="Total bill: 200,000 VND"
+                android:layout_marginTop="10dp"
+                android:textSize="24sp"
                 android:textStyle="bold"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/text_view_time"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_time" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:id="@+id/bill_column_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            android:orientation="horizontal"
+            android:background="@drawable/background_button_square_corner_black_grey_stroke"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_text_area">
+
+            <TextView
+                android:id="@+id/text_view_order_detail_title_product"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                tools:text="Product"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/text_view_order_detail_title_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                tools:text="Quantity"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/text_view_order_detail_title_unit_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                tools:text="Price"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/text_view_order_detail_title_total_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                tools:text="Total"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_View_history"
+            android:id="@+id/recycler_View_history_order_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="5dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_text_area"
-            tools:listitem="@layout/layout_history_item" />
+            app:layout_constraintTop_toBottomOf="@id/bill_column_area"
+            tools:listitem="@layout/layout_order_detail_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
