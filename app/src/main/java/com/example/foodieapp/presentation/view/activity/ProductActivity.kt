@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,6 +20,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodieapp.R
+import com.example.foodieapp.common.AppCommon
+import com.example.foodieapp.common.AppSharedPreferences
 import com.example.foodieapp.data.api.AppResource
 import com.example.foodieapp.data.model.Cart
 import com.example.foodieapp.presentation.adapter.ProductAdapter
@@ -51,6 +54,8 @@ class ProductActivity : AppCompatActivity() {
             insets
         }
 
+
+
         initViews()
         mapView()
         observerData()
@@ -58,6 +63,7 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun event() {
+
         productViewModel.getProductList()
         productViewModel.getCart(this@ProductActivity)
     }
@@ -85,6 +91,7 @@ class ProductActivity : AppCompatActivity() {
             when (it) {
                 is AppResource.Success -> {
                     updateBadge(it.data)
+                    ToastUtils.showToast(this, it.data?.listProduct?.size.toString())
                 }
 
                 is AppResource.Error -> {
@@ -100,6 +107,14 @@ class ProductActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar_home)
         layoutLoading = findViewById(R.id.layout_loading)
         productRecyclerView?.adapter = productAdapter
+        // set on click for add button
+        productAdapter.setOnAddClickListener {
+            Toast.makeText(this@ProductActivity, "button add ${it+1}", Toast.LENGTH_SHORT).show()
+        }
+        // set on click for detail button
+        productAdapter.setOnDetailClickListener {
+            Toast.makeText(this@ProductActivity, "button detail ${it+1}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     @SuppressLint("UseSupportActionBar")

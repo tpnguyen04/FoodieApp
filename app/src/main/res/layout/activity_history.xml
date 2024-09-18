@@ -38,7 +38,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
+        android:visibility="visible"
         >
 
         <TextView
@@ -90,7 +90,7 @@
         android:id="@+id/layout_order_detail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_home"
         app:layout_constraintBottom_toBottomOf="parent"
         >

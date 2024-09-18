@@ -1,7 +1,10 @@
 package com.example.foodieapp.data.api
 
+import android.content.Context
 import com.example.foodieapp.common.AppCommon
+import com.example.foodieapp.common.AppSharedPreferences
 import com.google.gson.GsonBuilder
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

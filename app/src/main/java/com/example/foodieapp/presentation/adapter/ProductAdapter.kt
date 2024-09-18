@@ -5,7 +5,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,7 +17,9 @@ import com.example.foodieapp.data.model.Product
 import com.example.foodieapp.utils.StringUtils
 
 class ProductAdapter(
-    private var context: Context? = null
+    private var context: Context? = null,
+    private var onButtonAddClick: ((Int) -> Unit)? = null,
+    private var onButtonDetailClick: ((Int) -> Unit)? = null
 ): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     private var listProduct: List<Product?> = emptyList()
@@ -32,12 +36,16 @@ class ProductAdapter(
         private var textViewName: TextView? = null
         private var textViewAddress: TextView? = null
         private var textViewPrice: TextView? = null
+        private var buttonAddProduct: LinearLayout? = null
+        private var buttonDetailProduct: LinearLayout? = null
 
         init {
             imageView = view.findViewById(R.id.image_view_product)
             textViewName = view.findViewById(R.id.text_view_product_name)
             textViewAddress = view.findViewById(R.id.text_view_product_address)
             textViewPrice = view.findViewById(R.id.text_view_product_price)
+            buttonAddProduct = view.findViewById(R.id.button_add_product)
+            buttonDetailProduct = view.findViewById(R.id.button_detail_product)
         }
 
         fun bind(context: Context, product: Product?) {
@@ -56,6 +64,14 @@ class ProductAdapter(
                     StringUtils.formatCurrency(product.price ?: 0)
                 )
             }
+            buttonAddProduct?.setOnClickListener {
+                onButtonAddClick?.invoke(adapterPosition)
+                return@setOnClickListener
+            }
+            buttonDetailProduct?.setOnClickListener {
+                onButtonDetailClick?.invoke(adapterPosition)
+                return@setOnClickListener
+            }
         }
     }
 
@@ -71,5 +87,13 @@ class ProductAdapter(
 
     override fun getItemCount(): Int {
         return listProduct.size
+    }
+
+    fun setOnAddClickListener(onButtonAddClick: (Int) -> Unit) {
+        this.onButtonAddClick = onButtonAddClick
+    }
+
+    fun setOnDetailClickListener(onButtonDetailClick: (Int) -> Unit) {
+        this.onButtonDetailClick = onButtonDetailClick
     }
 }

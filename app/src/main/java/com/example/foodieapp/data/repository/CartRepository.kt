@@ -1,6 +1,9 @@
 package com.example.foodieapp.data.repository
 
+import android.content.Context
+import com.example.foodieapp.common.AppCommon
 import com.example.foodieapp.common.AppInterface
+import com.example.foodieapp.common.AppSharedPreferences
 import com.example.foodieapp.data.api.ApiService
 import com.example.foodieapp.data.api.RetrofitClient
 import com.example.foodieapp.data.api.dto.AppResponseDTO
@@ -33,7 +36,7 @@ object CartRepository {
                     call: Call<AppResponseDTO<CartDTO>>,
                     response: Response<AppResponseDTO<CartDTO>>
                 ) {
-                    if ((response.isSuccessful && response.body() != null) || StatusCodeType.ERROR_CODE_500.code == response.code()) {
+                    if ((response.isSuccessful && response.body() != null || StatusCodeType.ERROR_CODE_500.code == response.code())) {
                         onListenResponse.onSuccess(response.body()?.data)
                     } else if (response.errorBody() != null && StatusCodeType.hasCodeError(response.code())) {
                         val json = JSONObject(response.errorBody()?.string() ?: "{}")
@@ -41,7 +44,6 @@ object CartRepository {
                         onListenResponse.onFail(errorMessage)
                     }
                 }
-
             })
         }
     }
