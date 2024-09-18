@@ -25,13 +25,30 @@ class CartViewModel: ViewModel() {
 
     fun getCartLiveData(): LiveData<AppResource<Cart?>> = cartLiveData
 
-    fun getCart(context: Context) {
-        val token = AppSharedPreferences.getString(context, AppCommon.KEY_TOKEN)
-        if (token.isEmpty()) return
+    fun getCart(token: String) {
 
         loadingLiveData.value = true
         viewModelScope.launch {
             cartRepository.getCart(token, object : AppInterface.OnListenResponse<CartDTO> {
+                override fun onFail(message: String) {
+                    cartLiveData.postValue(AppResource.Error(message))
+                    loadingLiveData.value = false
+                }
+
+                override fun onSuccess(data: CartDTO?) {
+                    val cart = CartHelper.parseCartDTO(data)
+                    cartLiveData.postValue(AppResource.Success(cart))
+                    loadingLiveData.value = false
+                }
+            })
+        }
+    }
+
+    fun addCart(token: String, idProduct: String) {
+
+        loadingLiveData.value = true
+        viewModelScope.launch {
+            cartRepository.addCart(token, idProduct, object : AppInterface.OnListenResponse<CartDTO> {
                 override fun onFail(message: String) {
                     cartLiveData.postValue(AppResource.Error(message))
                     loadingLiveData.value = false

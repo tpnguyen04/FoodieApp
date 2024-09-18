@@ -18,8 +18,8 @@ import com.example.foodieapp.utils.StringUtils
 
 class ProductAdapter(
     private var context: Context? = null,
-    private var onButtonAddClick: ((Int) -> Unit)? = null,
-    private var onButtonDetailClick: ((Int) -> Unit)? = null
+    private var onButtonAddClick: ((String) -> Unit)? = null,
+    private var onButtonDetailClick: ((String) -> Unit)? = null
 ): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     private var listProduct: List<Product?> = emptyList()
@@ -65,11 +65,11 @@ class ProductAdapter(
                 )
             }
             buttonAddProduct?.setOnClickListener {
-                onButtonAddClick?.invoke(adapterPosition)
+                onButtonAddClick?.invoke(product?.id.toString())
                 return@setOnClickListener
             }
             buttonDetailProduct?.setOnClickListener {
-                onButtonDetailClick?.invoke(adapterPosition)
+                onButtonDetailClick?.invoke(product?.id.toString())
                 return@setOnClickListener
             }
         }
@@ -89,11 +89,11 @@ class ProductAdapter(
         return listProduct.size
     }
 
-    fun setOnAddClickListener(onButtonAddClick: (Int) -> Unit) {
+    fun setOnAddClickListener(onButtonAddClick: (String) -> Unit) {
         this.onButtonAddClick = onButtonAddClick
     }
 
-    fun setOnDetailClickListener(onButtonDetailClick: (Int) -> Unit) {
+    fun setOnDetailClickListener(onButtonDetailClick: (String) -> Unit) {
         this.onButtonDetailClick = onButtonDetailClick
     }
 }

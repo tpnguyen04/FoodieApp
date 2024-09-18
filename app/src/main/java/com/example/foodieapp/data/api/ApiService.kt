@@ -26,4 +26,7 @@ interface ApiService {
 
     @GET("cart")
     fun getCartService(): Call<AppResponseDTO<CartDTO>>
+
+    @POST("cart/add")
+    fun addCartService(@Body body: HashMap<String, Any>): Call<AppResponseDTO<CartDTO>>
 }

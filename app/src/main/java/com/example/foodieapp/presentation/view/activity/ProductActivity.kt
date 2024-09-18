@@ -44,6 +44,8 @@ class ProductActivity : AppCompatActivity() {
         ViewModelProvider(this)[ProductViewModel::class.java]
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -54,6 +56,7 @@ class ProductActivity : AppCompatActivity() {
             insets
         }
 
+
         initViews()
         mapView()
         observerData()
@@ -61,9 +64,11 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun event() {
+        val token = AppSharedPreferences.getString(this@ProductActivity, AppCommon.KEY_TOKEN)
+        if (token.isEmpty()) return
 
         productViewModel.getProductList()
-        productViewModel.getCart(this@ProductActivity)
+        productViewModel.getCart(token)
     }
 
     private fun observerData() {
@@ -106,7 +111,10 @@ class ProductActivity : AppCompatActivity() {
         productRecyclerView?.adapter = productAdapter
         // set on click for add button
         productAdapter.setOnAddClickListener {
-            Toast.makeText(this@ProductActivity, "button add ${it+1}", Toast.LENGTH_SHORT).show()
+            val token = AppSharedPreferences.getString(this@ProductActivity, AppCommon.KEY_TOKEN)
+            if (token.isEmpty()) return@setOnAddClickListener
+            productViewModel.addCart(token, it)
+            Toast.makeText(this@ProductActivity, "Add cart success", Toast.LENGTH_SHORT).show()
         }
         // set on click for detail button
         productAdapter.setOnDetailClickListener {

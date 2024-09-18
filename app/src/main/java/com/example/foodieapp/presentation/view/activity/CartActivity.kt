@@ -17,6 +17,8 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodieapp.R
+import com.example.foodieapp.common.AppCommon
+import com.example.foodieapp.common.AppSharedPreferences
 import com.example.foodieapp.data.api.AppResource
 import com.example.foodieapp.presentation.adapter.CartAdapter
 import com.example.foodieapp.presentation.adapter.ProductAdapter
@@ -63,7 +65,9 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun event() {
-        cartViewModel.getCart(this@CartActivity)
+        val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
+        if (token.isEmpty()) return
+        cartViewModel.getCart(token)
         buttonViewProductList?.setOnClickListener {
             finish()
         }
