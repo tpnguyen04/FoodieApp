@@ -54,8 +54,6 @@ class ProductActivity : AppCompatActivity() {
             insets
         }
 
-
-
         initViews()
         mapView()
         observerData()
@@ -91,7 +89,6 @@ class ProductActivity : AppCompatActivity() {
             when (it) {
                 is AppResource.Success -> {
                     updateBadge(it.data)
-                    ToastUtils.showToast(this, it.data?.listProduct?.size.toString())
                 }
 
                 is AppResource.Error -> {

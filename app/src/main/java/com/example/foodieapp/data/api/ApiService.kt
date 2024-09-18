@@ -21,6 +21,9 @@ interface ApiService {
     @GET("product")
     fun getProductListService(): Call<AppResponseDTO<List<ProductDTO>>>
 
+//    @GET("cart")
+//    fun getCartService(@Header("Authorization") token: String): Call<AppResponseDTO<CartDTO>>
+
     @GET("cart")
-    fun getCartService(@Header("Authorization") token: String): Call<AppResponseDTO<CartDTO>>
+    fun getCartService(): Call<AppResponseDTO<CartDTO>>
 }
