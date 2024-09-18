@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -125,6 +126,21 @@ class CartActivity : AppCompatActivity() {
         textViewTotalNumber = findViewById(R.id.text_view_total_number)
         buttonConfirmOrder = findViewById(R.id.button_confirm_order)
         toolbar = findViewById(R.id.toolbar_home)
+        // set on click for add button
+        cartAdapter.setOnAddClickListener {
+            val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
+            if (token.isEmpty()) return@setOnAddClickListener
+            cartViewModel.addCart(token, it)
+            Toast.makeText(this@CartActivity, "Add cart success", Toast.LENGTH_SHORT).show()
+        }
+        // set on click for subtract button
+        cartAdapter.setOnSubtractClickListener {
+            Toast.makeText(this@CartActivity, "subtract $it", Toast.LENGTH_SHORT).show()
+        }
+        // set on click for delete button
+        cartAdapter.setOnDeleteClickListener {
+            Toast.makeText(this@CartActivity, "delete $it", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.FoodieApp"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.view.activity.ProductDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.activity.OrderDetailActivity"
             android:exported="false" />
         <activity

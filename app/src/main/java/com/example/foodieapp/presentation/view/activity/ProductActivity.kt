@@ -118,7 +118,7 @@ class ProductActivity : AppCompatActivity() {
         }
         // set on click for detail button
         productAdapter.setOnDetailClickListener {
-            Toast.makeText(this@ProductActivity, "button detail ${it+1}", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@ProductActivity, ProductDetailActivity::class.java))
         }
     }
 

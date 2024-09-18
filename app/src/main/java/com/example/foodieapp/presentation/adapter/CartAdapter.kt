@@ -17,6 +17,9 @@ import com.example.foodieapp.utils.StringUtils
 
 class CartAdapter(
     private var context: Context? = null,
+    private var onButtonAddClick: ((String) -> Unit)? = null,
+    private var onButtonSubtractClick: ((String) -> Unit)? = null,
+    private var onButtonDeleteClick: ((String) -> Unit)? = null
 ):RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     private var listProduct: List<Product?> = emptyList()
@@ -62,6 +65,18 @@ class CartAdapter(
                 )
                 textViewNumberProduct?.text = it.quantity.toString()
             }
+            buttonSubtract?.setOnClickListener {
+                onButtonSubtractClick?.invoke(product?.id.toString())
+                return@setOnClickListener
+            }
+            buttonAdd?.setOnClickListener {
+                onButtonAddClick?.invoke(product?.id.toString())
+                return@setOnClickListener
+            }
+            buttonDelete?.setOnClickListener {
+                onButtonDeleteClick?.invoke(product?.id.toString())
+                return@setOnClickListener
+            }
         }
 
     }
@@ -78,5 +93,17 @@ class CartAdapter(
 
     override fun getItemCount(): Int {
         return listProduct.size
+    }
+
+    fun setOnAddClickListener(onButtonAddClick: (String) -> Unit) {
+        this.onButtonAddClick = onButtonAddClick
+    }
+
+    fun setOnSubtractClickListener(onButtonSubtractClick: (String) -> Unit) {
+        this.onButtonSubtractClick = onButtonSubtractClick
+    }
+
+    fun setOnDeleteClickListener(onButtonDeleteClick: (String) -> Unit) {
+        this.onButtonDeleteClick = onButtonDeleteClick
     }
 }
