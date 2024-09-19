@@ -32,4 +32,7 @@ interface ApiService {
 
     @POST("cart/update")
     fun updateCartService(@Body body: HashMap<String, Any>): Call<AppResponseDTO<CartDTO>>
+
+    @POST("cart/conform")
+    fun confirmCartService(@Body body: HashMap<String, Any>): Call<AppResponseDTO<String>>
 }

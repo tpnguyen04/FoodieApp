@@ -27,6 +27,9 @@ import com.example.foodieapp.presentation.viewmodel.CartViewModel
 import com.example.foodieapp.presentation.viewmodel.ProductViewModel
 import com.example.foodieapp.utils.StringUtils
 import com.example.foodieapp.utils.ToastUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 
 class CartActivity : AppCompatActivity() {
 
@@ -49,6 +52,10 @@ class CartActivity : AppCompatActivity() {
         ViewModelProvider(this)[CartViewModel::class.java]
     }
 
+    private val productViewModel by lazy {
+        ViewModelProvider(this)[ProductViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -66,11 +73,29 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun event() {
+
         val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
         if (token.isEmpty()) return
         cartViewModel.getCart(token)
         buttonViewProductList?.setOnClickListener {
             finish()
+        }
+        buttonConfirmOrder?.setOnClickListener {
+            val cartId = AppSharedPreferences.getString(this, AppCommon.CART_ID)
+            cartViewModel.confirmCart(token, cartId)
+            cartViewModel.updateCartLiveData(token)
+        }
+        // set on click for add button
+        cartAdapter.setOnAddClickListener { productId, _, _ ->
+            cartViewModel.addCart(token, productId)
+        }
+        // set on click for subtract button
+        cartAdapter.setOnSubtractClickListener { productId, cartId, quantity ->
+            cartViewModel.updateCart(token, productId, cartId, quantity-1)
+        }
+        // set on click for delete button
+        cartAdapter.setOnDeleteClickListener { productId, cartId, _ ->
+            cartViewModel.updateCart(token, productId, cartId, 0)
         }
     }
 
@@ -84,8 +109,13 @@ class CartActivity : AppCompatActivity() {
         cartViewModel.getCartLiveData().observe(this) {
             when (it) {
                 is AppResource.Success -> {
+                    // set list product for cart adapter
                     cartAdapter.setListProduct(it.data?.listProduct ?: emptyList())
+                    // save cart id to SharePreferences
+                    AppSharedPreferences.saveData(this@CartActivity, AppCommon.CART_ID, it.data?.id.toString())
+                    // set cart id for cart adapter
                     cartAdapter.setCurrentCart(it.data)
+
                     val numberOfCart = it.data?.listProduct?.size ?: 0
                     if (numberOfCart < 1) {
                         layoutCartEmpty?.isVisible = true
@@ -104,6 +134,15 @@ class CartActivity : AppCompatActivity() {
                     //show error
                     ToastUtils.showToast(this, it.error)
                 }
+            }
+        }
+        // cart confirm
+        cartViewModel.getConfirmCardLiveData().observe(this) {
+            when (it) {
+                is AppResource.Success -> {
+                    ToastUtils.showToast(this, it.data.toString())
+                }
+                is AppResource.Error -> it.error
             }
         }
     }
@@ -127,33 +166,16 @@ class CartActivity : AppCompatActivity() {
         textViewTotalNumber = findViewById(R.id.text_view_total_number)
         buttonConfirmOrder = findViewById(R.id.button_confirm_order)
         toolbar = findViewById(R.id.toolbar_home)
-        // set on click for add button
-        cartAdapter.setOnAddClickListener { productId, _, _ ->
-            val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
-            if (token.isEmpty()) return@setOnAddClickListener
-            cartViewModel.addCart(token, productId)
-            Toast.makeText(this@CartActivity, "Add product to cart success", Toast.LENGTH_SHORT).show()
-        }
-        // set on click for subtract button
-        cartAdapter.setOnSubtractClickListener { productId, cartId, quantity ->
-            val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
-            if (token.isEmpty()) return@setOnSubtractClickListener
-            cartViewModel.updateCart(token, productId, cartId, quantity-1)
-            Toast.makeText(this@CartActivity, "Subtract product from success", Toast.LENGTH_SHORT).show()
-        }
-        // set on click for delete button
-        cartAdapter.setOnDeleteClickListener { productId, cartId, _ ->
-            val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
-            if (token.isEmpty()) return@setOnDeleteClickListener
-            cartViewModel.updateCart(token, productId, cartId, 0)
-            Toast.makeText(this@CartActivity, "Subtract product from success", Toast.LENGTH_SHORT).show()
-        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             // back button
-            android.R.id.home -> finish()
+
+            android.R.id.home -> {
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

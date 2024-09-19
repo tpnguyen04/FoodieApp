@@ -17,6 +17,7 @@ import com.example.foodieapp.data.repository.CartRepository
 import com.example.foodieapp.data.repository.ProductRepository
 import com.example.foodieapp.helper.CartHelper
 import com.example.foodieapp.helper.ProductHelper
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ProductViewModel: ViewModel() {
@@ -31,6 +32,24 @@ class ProductViewModel: ViewModel() {
     fun getLoading(): LiveData<Boolean> = loadingLiveData
     fun getProductLiveData(): LiveData<AppResource<List<Product?>>> = productLiveData
     fun getCartLiveData(): LiveData<AppResource<Cart?>> = cartLiveData
+
+    fun updateCartLiveData(token: String) {
+        viewModelScope.launch {
+            delay(500)
+            cartRepository.getCart(token, object : AppInterface.OnListenResponse<CartDTO> {
+                override fun onFail(message: String) {
+                    cartLiveData.postValue(AppResource.Error(message))
+                    loadingLiveData.value = false
+                }
+
+                override fun onSuccess(data: CartDTO?) {
+                    val cart = CartHelper.parseCartDTO(data)
+                    cartLiveData.postValue(AppResource.Success(cart))
+                    loadingLiveData.value = false
+                }
+            })
+        }
+    }
 
     fun getProductList() {
         loadingLiveData.value = true
