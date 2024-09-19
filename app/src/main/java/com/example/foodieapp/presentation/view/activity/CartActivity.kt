@@ -85,6 +85,7 @@ class CartActivity : AppCompatActivity() {
             when (it) {
                 is AppResource.Success -> {
                     cartAdapter.setListProduct(it.data?.listProduct ?: emptyList())
+                    cartAdapter.setCurrentCart(it.data)
                     val numberOfCart = it.data?.listProduct?.size ?: 0
                     if (numberOfCart < 1) {
                         layoutCartEmpty?.isVisible = true
@@ -127,19 +128,25 @@ class CartActivity : AppCompatActivity() {
         buttonConfirmOrder = findViewById(R.id.button_confirm_order)
         toolbar = findViewById(R.id.toolbar_home)
         // set on click for add button
-        cartAdapter.setOnAddClickListener {
+        cartAdapter.setOnAddClickListener { productId, _, _ ->
             val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
             if (token.isEmpty()) return@setOnAddClickListener
-            cartViewModel.addCart(token, it)
-            Toast.makeText(this@CartActivity, "Add cart success", Toast.LENGTH_SHORT).show()
+            cartViewModel.addCart(token, productId)
+            Toast.makeText(this@CartActivity, "Add product to cart success", Toast.LENGTH_SHORT).show()
         }
         // set on click for subtract button
-        cartAdapter.setOnSubtractClickListener {
-            Toast.makeText(this@CartActivity, "subtract $it", Toast.LENGTH_SHORT).show()
+        cartAdapter.setOnSubtractClickListener { productId, cartId, quantity ->
+            val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
+            if (token.isEmpty()) return@setOnSubtractClickListener
+            cartViewModel.updateCart(token, productId, cartId, quantity-1)
+            Toast.makeText(this@CartActivity, "Subtract product from success", Toast.LENGTH_SHORT).show()
         }
         // set on click for delete button
-        cartAdapter.setOnDeleteClickListener {
-            Toast.makeText(this@CartActivity, "delete $it", Toast.LENGTH_SHORT).show()
+        cartAdapter.setOnDeleteClickListener { productId, cartId, _ ->
+            val token = AppSharedPreferences.getString(this@CartActivity, AppCommon.KEY_TOKEN)
+            if (token.isEmpty()) return@setOnDeleteClickListener
+            cartViewModel.updateCart(token, productId, cartId, 0)
+            Toast.makeText(this@CartActivity, "Subtract product from success", Toast.LENGTH_SHORT).show()
         }
     }
 

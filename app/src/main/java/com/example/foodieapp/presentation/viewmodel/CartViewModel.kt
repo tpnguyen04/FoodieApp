@@ -26,7 +26,6 @@ class CartViewModel: ViewModel() {
     fun getCartLiveData(): LiveData<AppResource<Cart?>> = cartLiveData
 
     fun getCart(token: String) {
-
         loadingLiveData.value = true
         viewModelScope.launch {
             cartRepository.getCart(token, object : AppInterface.OnListenResponse<CartDTO> {
@@ -45,10 +44,27 @@ class CartViewModel: ViewModel() {
     }
 
     fun addCart(token: String, idProduct: String) {
-
         loadingLiveData.value = true
         viewModelScope.launch {
             cartRepository.addCart(token, idProduct, object : AppInterface.OnListenResponse<CartDTO> {
+                override fun onFail(message: String) {
+                    cartLiveData.postValue(AppResource.Error(message))
+                    loadingLiveData.value = false
+                }
+
+                override fun onSuccess(data: CartDTO?) {
+                    val cart = CartHelper.parseCartDTO(data)
+                    cartLiveData.postValue(AppResource.Success(cart))
+                    loadingLiveData.value = false
+                }
+            })
+        }
+    }
+
+    fun updateCart(token: String, idProduct: String, idCart: String, quantity: Int) {
+        loadingLiveData.value = true
+        viewModelScope.launch {
+            cartRepository.updateCart(token, idProduct, idCart, quantity, object : AppInterface.OnListenResponse<CartDTO> {
                 override fun onFail(message: String) {
                     cartLiveData.postValue(AppResource.Error(message))
                     loadingLiveData.value = false
