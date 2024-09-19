@@ -25,7 +25,9 @@ import com.example.foodieapp.common.AppSharedPreferences
 import com.example.foodieapp.data.api.AppResource
 import com.example.foodieapp.data.model.Cart
 import com.example.foodieapp.presentation.adapter.ProductAdapter
+import com.example.foodieapp.presentation.viewmodel.CartViewModel
 import com.example.foodieapp.presentation.viewmodel.ProductViewModel
+import com.example.foodieapp.utils.BadgeUtils
 import com.example.foodieapp.utils.ToastUtils
 
 class ProductActivity : AppCompatActivity() {
@@ -43,8 +45,6 @@ class ProductActivity : AppCompatActivity() {
     private val productViewModel by lazy {
         ViewModelProvider(this)[ProductViewModel::class.java]
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +93,7 @@ class ProductActivity : AppCompatActivity() {
         productViewModel.getCartLiveData().observe(this) {
             when (it) {
                 is AppResource.Success -> {
-                    updateBadge(it.data)
+                    BadgeUtils.updateBadge(textBadge, it.data)
                 }
 
                 is AppResource.Error -> {
@@ -114,7 +114,7 @@ class ProductActivity : AppCompatActivity() {
             val token = AppSharedPreferences.getString(this@ProductActivity, AppCommon.KEY_TOKEN)
             if (token.isEmpty()) return@setOnAddClickListener
             productViewModel.addCart(token, it)
-            Toast.makeText(this@ProductActivity, "Add cart success", Toast.LENGTH_SHORT).show()
+            ToastUtils.showToast(this@ProductActivity, "Add cart success")
         }
         // set on click for detail button
         productAdapter.setOnDetailClickListener {
@@ -146,18 +146,5 @@ class ProductActivity : AppCompatActivity() {
             R.id.item_menu_order_history -> startActivity(Intent(this@ProductActivity, HistoryActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun updateBadge(cart: Cart?) {
-        val totalProduct = cart?.listProduct?.size ?: 0
-        if (totalProduct == 0) {
-            textBadge?.isGone = true
-        } else {
-            textBadge?.isVisible = true
-            textBadge?.text = cart?.listProduct
-                ?.map { it?.quantity ?: 0 }
-                ?.reduce { acc, quantity -> acc + quantity }
-                .toString()
-        }
     }
 }

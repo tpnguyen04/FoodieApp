@@ -13,5 +13,6 @@ object AppCommon {
     // key token
     val KEY_TOKEN = "token"
 
-
+    // cart id
+    val CART_ID = "cartID"
 }

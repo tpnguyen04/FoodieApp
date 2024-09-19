@@ -117,4 +117,36 @@ object CartRepository {
             })
         }
     }
+
+    fun confirmCart(
+        token: String,
+        idCart: String,
+        onListenResponse: AppInterface.OnListenResponse<String>
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val hashMap = HashMap<String, Any>().apply {
+                put("id_cart", idCart)
+            }
+            val retrofitWithToken: Retrofit = createRetrofitWithToken(token)
+            val apiServiceWithToken = retrofitWithToken.create(ApiService::class.java)
+            apiServiceWithToken.confirmCartService(hashMap).enqueue(object: Callback<AppResponseDTO<String>> {
+                override fun onFailure(call: Call<AppResponseDTO<String>>, t: Throwable) {
+                    onListenResponse.onFail(t.message.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<AppResponseDTO<String>>,
+                    response: Response<AppResponseDTO<String>>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        onListenResponse.onSuccess(response.body()?.data)
+                    } else if (response.errorBody() != null && StatusCodeType.hasCodeError(response.code())) {
+                        val json = JSONObject(response.errorBody()?.string() ?: "{}")
+                        val errorMessage = json.optString("message")
+                        onListenResponse.onFail(errorMessage)
+                    }
+                }
+            })
+        }
+    }
 }
