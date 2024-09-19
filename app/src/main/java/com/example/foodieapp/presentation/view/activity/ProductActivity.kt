@@ -147,4 +147,9 @@ class ProductActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        productViewModel.updateCartLiveData(AppSharedPreferences.getString(this@ProductActivity, AppCommon.KEY_TOKEN))
+    }
 }
