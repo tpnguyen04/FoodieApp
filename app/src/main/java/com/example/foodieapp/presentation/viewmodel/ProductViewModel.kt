@@ -48,6 +48,27 @@ class ProductViewModel: ViewModel() {
         }
     }
 
+    fun updateProductList() {
+        loadingLiveData.value = true
+        viewModelScope.launch {
+            delay(500)
+            productRepository.getProductList(onListenResponse = object : AppInterface.OnListenResponse<List<ProductDTO>> {
+                override fun onFail(message: String) {
+                    productLiveData.postValue(AppResource.Error(message))
+                    loadingLiveData.value = false
+                }
+
+                override fun onSuccess(data: List<ProductDTO>?) {
+                    val listProduct = data?.map {
+                        ProductHelper.convertToProduct(it)
+                    }
+                    productLiveData.postValue(AppResource.Success(listProduct))
+                    loadingLiveData.value = false
+                }
+            })
+        }
+    }
+
     fun getProductList() {
         loadingLiveData.value = true
         viewModelScope.launch {

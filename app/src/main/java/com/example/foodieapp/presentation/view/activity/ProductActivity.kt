@@ -156,5 +156,6 @@ class ProductActivity : AppCompatActivity() {
     override fun onRestart() {
         super.onRestart()
         productViewModel.updateCartLiveData(AppSharedPreferences.getString(this@ProductActivity, AppCommon.KEY_TOKEN))
+        productViewModel.updateProductList()
     }
 }
