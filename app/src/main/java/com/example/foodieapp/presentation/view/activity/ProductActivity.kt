@@ -56,7 +56,6 @@ class ProductActivity : AppCompatActivity() {
             insets
         }
 
-
         initViews()
         mapView()
         observerData()
@@ -119,6 +118,10 @@ class ProductActivity : AppCompatActivity() {
         // set on click for detail button
         productAdapter.setOnDetailClickListener {
             startActivity(Intent(this@ProductActivity, ProductDetailActivity::class.java))
+        }
+        // set on click for product item
+        productAdapter.setOnProductItemClickListener {
+            ToastUtils.showToast(this@ProductActivity, it.toString())
         }
     }
 

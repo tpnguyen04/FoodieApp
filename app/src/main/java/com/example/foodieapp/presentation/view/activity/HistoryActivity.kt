@@ -1,5 +1,6 @@
 package com.example.foodieapp.presentation.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.LinearLayout
@@ -35,7 +36,7 @@ class HistoryActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
 
     private val historyAdapter: HistoryAdapter by lazy {
-        HistoryAdapter(this@HistoryActivity)
+        HistoryAdapter()
     }
 
     private val historyViewModel by lazy {
@@ -66,7 +67,9 @@ class HistoryActivity : AppCompatActivity() {
             finish()
         }
         historyAdapter.setOnHistoryItemClickListener {
-            ToastUtils.showToast(this, it.toString())
+            val intent = Intent(this@HistoryActivity, HistoryDetailActivity::class.java)
+            intent.putExtra(AppCommon.CART_NUMBER, it)
+            startActivity(intent)
         }
     }
 
@@ -77,7 +80,6 @@ class HistoryActivity : AppCompatActivity() {
         }
 
         // history
-        // cart
         historyViewModel.getHistoryLiveData().observe(this) {
             when (it) {
                 is AppResource.Success -> {

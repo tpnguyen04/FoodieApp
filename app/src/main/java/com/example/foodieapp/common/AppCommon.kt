@@ -15,4 +15,7 @@ object AppCommon {
 
     // cart id
     val CART_ID = "cartID"
+
+    // cart number
+    val CART_NUMBER = "cartNumber"
 }

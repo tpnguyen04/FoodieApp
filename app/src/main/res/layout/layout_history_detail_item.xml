@@ -16,7 +16,7 @@
         >
 
         <TextView
-            android:id="@+id/text_view_order_detail_item_product"
+            android:id="@+id/text_view_history_detail_item_product"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -25,7 +25,7 @@
             tools:text="A Chảy - Mì Sủi Cảo &amp; Cơm Chiên Gà Xối Mỡ - Shop Online" />
 
         <TextView
-            android:id="@+id/text_view_order_detail_item_quantity"
+            android:id="@+id/text_view_history_detail_item_quantity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             tools:text="2"
@@ -36,10 +36,10 @@
             />
 
         <TextView
-            android:id="@+id/text_view_order_detail_item_price"
+            android:id="@+id/text_view_history_detail_unit_price"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="110,000"
+            tools:text="110,000"
             android:gravity="center"
             android:textSize="16sp"
             android:padding="5dp"
@@ -47,10 +47,10 @@
             />
 
         <TextView
-            android:id="@+id/text_view_order_detail_item_total"
+            android:id="@+id/text_view_history_detail_total_price"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="220,000"
+            tools:text="220,000"
             android:gravity="center"
             android:textSize="16sp"
             android:padding="5dp"

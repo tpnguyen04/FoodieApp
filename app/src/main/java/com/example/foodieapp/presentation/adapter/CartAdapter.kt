@@ -110,7 +110,6 @@ class CartAdapter(
         this.onButtonAddClick = onButtonAddClick
     }
 
-
     fun setOnSubtractClickListener(onButtonSubtractClick: (String, String, Int) -> Unit) {
         this.onButtonSubtractClick = onButtonSubtractClick
     }

@@ -27,14 +27,14 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/text_view_time"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_bill_time"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_time"
+            android:id="@+id/text_view_bill_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="17:52:29, 23/11/2024"
@@ -55,7 +55,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/text_view_time"
+            app:layout_constraintStart_toEndOf="@+id/text_view_bill_time"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

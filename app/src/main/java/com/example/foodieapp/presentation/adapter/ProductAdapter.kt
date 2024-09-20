@@ -19,7 +19,8 @@ import com.example.foodieapp.utils.StringUtils
 class ProductAdapter(
     private var context: Context? = null,
     private var onButtonAddClick: ((String) -> Unit)? = null,
-    private var onButtonDetailClick: ((String) -> Unit)? = null
+    private var onButtonDetailClick: ((String) -> Unit)? = null,
+    private var onProductItemClick: ((Int) -> Unit)? = null
 ): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     private var listProduct: List<Product?> = emptyList()
@@ -83,6 +84,9 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         context?.let { holder.bind(it, listProduct.getOrNull(position)) }
+        holder.itemView.setOnClickListener {
+            onProductItemClick?.invoke(position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -95,5 +99,9 @@ class ProductAdapter(
 
     fun setOnDetailClickListener(onButtonDetailClick: (String) -> Unit) {
         this.onButtonDetailClick = onButtonDetailClick
+    }
+
+    fun setOnProductItemClickListener(onProductItemClick: (Int) -> Unit) {
+        this.onProductItemClick = onProductItemClick
     }
 }
