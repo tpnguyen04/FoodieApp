@@ -52,10 +52,6 @@ class CartActivity : AppCompatActivity() {
         ViewModelProvider(this)[CartViewModel::class.java]
     }
 
-    private val productViewModel by lazy {
-        ViewModelProvider(this)[ProductViewModel::class.java]
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -172,10 +168,7 @@ class CartActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             // back button
-
-            android.R.id.home -> {
-                finish()
-            }
+            android.R.id.home -> { finish() }
         }
         return super.onOptionsItemSelected(item)
     }

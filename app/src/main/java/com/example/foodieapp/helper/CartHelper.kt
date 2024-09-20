@@ -4,7 +4,7 @@ import com.example.foodieapp.data.api.dto.CartDTO
 import com.example.foodieapp.data.model.Cart
 
 object CartHelper {
-    fun parseCartDTO(cartDTO: CartDTO?): Cart {
+    fun convertToCart(cartDTO: CartDTO?): Cart {
         return Cart(
             id = cartDTO?.id ?: "",
             idUser = cartDTO?.idUser ?: "",

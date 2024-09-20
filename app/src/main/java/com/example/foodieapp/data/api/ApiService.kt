@@ -35,4 +35,7 @@ interface ApiService {
 
     @POST("cart/conform")
     fun confirmCartService(@Body body: HashMap<String, Any>): Call<AppResponseDTO<String>>
+
+    @POST("order/history")
+    fun getHistoryService(): Call<AppResponseDTO<List<CartDTO>>>
 }

@@ -1,14 +1,10 @@
 package com.example.foodieapp.presentation.viewmodel
 
-import android.annotation.SuppressLint
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.foodieapp.common.AppCommon
 import com.example.foodieapp.common.AppInterface
-import com.example.foodieapp.common.AppSharedPreferences
 import com.example.foodieapp.data.api.AppResource
 import com.example.foodieapp.data.api.dto.CartDTO
 import com.example.foodieapp.data.model.Cart
@@ -39,7 +35,7 @@ class CartViewModel: ViewModel() {
                 }
 
                 override fun onSuccess(data: CartDTO?) {
-                    val cart = CartHelper.parseCartDTO(data)
+                    val cart = CartHelper.convertToCart(data)
                     cartLiveData.postValue(AppResource.Success(cart))
                     loadingLiveData.value = false
                 }
@@ -57,7 +53,7 @@ class CartViewModel: ViewModel() {
                 }
 
                 override fun onSuccess(data: CartDTO?) {
-                    val cart = CartHelper.parseCartDTO(data)
+                    val cart = CartHelper.convertToCart(data)
                     cartLiveData.postValue(AppResource.Success(cart))
                     loadingLiveData.value = false
                 }
@@ -75,7 +71,7 @@ class CartViewModel: ViewModel() {
                 }
 
                 override fun onSuccess(data: CartDTO?) {
-                    val cart = CartHelper.parseCartDTO(data)
+                    val cart = CartHelper.convertToCart(data)
                     cartLiveData.postValue(AppResource.Success(cart))
                     loadingLiveData.value = false
                 }
@@ -93,7 +89,7 @@ class CartViewModel: ViewModel() {
                 }
 
                 override fun onSuccess(data: CartDTO?) {
-                    val cart = CartHelper.parseCartDTO(data)
+                    val cart = CartHelper.convertToCart(data)
                     cartLiveData.postValue(AppResource.Success(cart))
                     loadingLiveData.value = false
                 }

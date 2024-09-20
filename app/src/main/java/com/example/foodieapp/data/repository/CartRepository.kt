@@ -38,7 +38,7 @@ object CartRepository {
                     call: Call<AppResponseDTO<CartDTO>>,
                     response: Response<AppResponseDTO<CartDTO>>
                 ) {
-                    if ((response.isSuccessful && response.body() != null || StatusCodeType.ERROR_CODE_500.code == response.code())) {
+                    if ((response.isSuccessful && response.body() != null) || StatusCodeType.ERROR_CODE_500.code == response.code()) {
                         onListenResponse.onSuccess(response.body()?.data)
                     } else if (response.errorBody() != null && StatusCodeType.hasCodeError(response.code())) {
                         val json = JSONObject(response.errorBody()?.string() ?: "{}")

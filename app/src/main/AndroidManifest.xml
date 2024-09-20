@@ -18,7 +18,7 @@
             android:name=".presentation.view.activity.ProductDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.activity.OrderDetailActivity"
+            android:name=".presentation.view.activity.HistoryDetailActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.view.activity.HistoryActivity"
