@@ -32,7 +32,7 @@ class ProductViewModel: ViewModel() {
 
     fun updateCartLiveData(token: String) {
         viewModelScope.launch {
-            delay(100)
+            delay(500)
             cartRepository.getCart(token, object : AppInterface.OnListenResponse<CartDTO> {
                 override fun onFail(message: String) {
                     cartLiveData.postValue(AppResource.Error(message))

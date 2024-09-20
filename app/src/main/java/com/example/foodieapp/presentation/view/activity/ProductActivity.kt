@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -113,15 +112,18 @@ class ProductActivity : AppCompatActivity() {
             val token = AppSharedPreferences.getString(this@ProductActivity, AppCommon.KEY_TOKEN)
             if (token.isEmpty()) return@setOnAddClickListener
             productViewModel.addCart(token, it)
-            ToastUtils.showToast(this@ProductActivity, "Add cart success")
         }
         // set on click for detail button
         productAdapter.setOnDetailClickListener {
-            startActivity(Intent(this@ProductActivity, ProductDetailActivity::class.java))
+            val intent = Intent(this@ProductActivity, ProductDetailActivity::class.java)
+            intent.putExtra(AppCommon.PRODUCT_NUMBER, it)
+            startActivity(intent)
         }
         // set on click for product item
         productAdapter.setOnProductItemClickListener {
-            ToastUtils.showToast(this@ProductActivity, it.toString())
+            val intent = Intent(this@ProductActivity, ProductDetailActivity::class.java)
+            intent.putExtra(AppCommon.PRODUCT_NUMBER, it)
+            startActivity(intent)
         }
     }
 

@@ -18,4 +18,10 @@ object AppCommon {
 
     // cart number
     val CART_NUMBER = "cartNumber"
+
+    // cart number
+    val PRODUCT_ID = "ProductID"
+
+    // cart number
+    val PRODUCT_NUMBER = "ProductNumber"
 }

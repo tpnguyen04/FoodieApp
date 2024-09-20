@@ -2,6 +2,7 @@ package com.example.foodieapp.presentation.view.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -117,5 +118,13 @@ class HistoryDetailActivity : AppCompatActivity() {
         layoutBillColumnArea = findViewById(R.id.bill_column_area)
         recyclerViewHistoryDetail = findViewById(R.id.recycler_view_history_detail)
         recyclerViewHistoryDetail?.adapter = historyDetailAdapter
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            // back button
+            android.R.id.home -> { finish() }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
