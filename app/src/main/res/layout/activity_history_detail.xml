@@ -12,7 +12,7 @@
         android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
+        android:background="@color/white"
         app:contentInsetEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,9 +22,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Your Order Detail"
+            android:text="Chi tiết đơn hàng"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/grey"
             android:textSize="24sp"
             />
 
@@ -54,7 +54,7 @@
                 android:id="@+id/text_view_bill_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Order detail"
+                android:text="Thông tin chi tiết đơn hàng"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -79,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_button_rounded_corner_black_stroke"
-                tools:text="Total bill: 200,000 VND"
+                tools:text="Tổng tiền: 200,000 VND"
                 android:layout_marginTop="10dp"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -99,7 +99,6 @@
             android:orientation="horizontal"
             tools:visibility="visible"
             android:visibility="gone"
-            android:background="@drawable/background_button_square_corner_black_grey_stroke"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/detail_text_area">
@@ -112,7 +111,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="5dp"
-                android:text="Product"
+                android:text="Sản phẩm"
                 android:gravity="center"/>
 
             <TextView
@@ -123,7 +122,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="5dp"
-                android:text="Quan"
+                android:text="Số lượng"
                 android:gravity="center"/>
 
             <TextView
@@ -134,7 +133,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="5dp"
-                android:text="Price"
+                android:text="Đơn giá"
                 android:gravity="center"/>
 
             <TextView
@@ -145,7 +144,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:padding="5dp"
-                android:text="Total"
+                android:text="Tổng"
                 android:gravity="center"/>
 
         </LinearLayout>

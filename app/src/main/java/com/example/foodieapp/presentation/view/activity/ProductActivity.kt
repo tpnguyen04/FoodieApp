@@ -17,6 +17,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodieapp.R
 import com.example.foodieapp.common.AppCommon
@@ -107,6 +108,7 @@ class ProductActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar_home)
         layoutLoading = findViewById(R.id.layout_loading)
         productRecyclerView?.adapter = productAdapter
+        productRecyclerView?.layoutManager = GridLayoutManager(this@ProductActivity, 2)
         // set on click for add button
         productAdapter.setOnAddClickListener {
             val token = AppSharedPreferences.getString(this@ProductActivity, AppCommon.KEY_TOKEN)

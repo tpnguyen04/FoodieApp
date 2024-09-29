@@ -11,20 +11,37 @@
         android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
+        android:background="@color/white"
         app:contentInsetEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Food List"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:textColor="@color/white"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Chào bạn"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/grey"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Hôm nay bạn muốn ăn gì?"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                />
+
+        </LinearLayout>
+
+
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -34,8 +51,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar_home"
         android:layout_marginTop="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/layout_product_item" />
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/layout_product_item_grid" />
 
     <include
         android:id="@+id/layout_loading"

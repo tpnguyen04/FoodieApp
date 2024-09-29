@@ -83,7 +83,7 @@ class HistoryDetailActivity : AppCompatActivity() {
                         historyDetailAdapter.setCurrentCart(cart)
                         textViewBillTime?.text = TimeUtils.formatDateTime(cart.dateCreated.toString())
                         textViewBillTotalPrice?.text = String.format(
-                            "Total Bill: %s VND",
+                            "Tổng tiền: %s VND",
                             StringUtils.formatCurrency(cart.price?.toInt() ?: 0)
                         )
                     }

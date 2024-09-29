@@ -60,12 +60,12 @@ class SignUpActivity : AppCompatActivity() {
             val passwordReconfirm = editTextPasswordReconfirm.text.toString()
             // Check if input field is blank
             if (name.isBlank() || address.isBlank() || email.isBlank() || phone.isBlank() || password.isBlank() || passwordReconfirm.isBlank()) {
-                ToastUtils.showToast(this@SignUpActivity, "Please fill all the information")
+                ToastUtils.showToast(this@SignUpActivity, "Vui lòng điền đầy đủ các thông tin")
                 return@setOnClickListener
             }
             // check if reconfirm password does not match
             if (passwordReconfirm != password) {
-                ToastUtils.showToast(this@SignUpActivity, "Reconfirm password does not match")
+                ToastUtils.showToast(this@SignUpActivity, "Nhập lại mật khẩu chưa khớp")
                 return@setOnClickListener
             }
             viewModel.signUp(
@@ -86,7 +86,7 @@ class SignUpActivity : AppCompatActivity() {
         viewModel.getUser().observe(this) {
             when(it) {
                 is AppResource.Success -> {
-                    ToastUtils.showToast(this, "Sign up Success!")
+                    ToastUtils.showToast(this, "Đăng ký thành công!")
                     finish()
                 }
                 is AppResource.Error -> {
@@ -112,10 +112,10 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun displayTextViewLogin() {
         SpannableStringBuilder().apply {
-            append("Already have an account? ")
+            append("Bạn đã có tài khoản rồi? ")
             append(
                 SpannedUtils.setClickColorLink(
-                text = "Log in here",
+                text = "Đăng nhập tại đây",
                 context = this@SignUpActivity,
                 onListenClick = { finish() }
             ))

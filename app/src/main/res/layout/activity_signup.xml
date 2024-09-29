@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
-        android:hint="Name"
+        android:hint="Họ và tên"
         app:placeholderText="Example : Mr John"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
@@ -58,7 +58,7 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
         app:placeholderText="Example : District 1"
-        android:hint="Address"
+        android:hint="Địa chỉ"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
-        android:hint="Phone"
+        android:hint="Số điện thoại"
         app:placeholderText="Example : (+84) 123 456 789"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
@@ -133,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
-        android:hint="Password"
+        android:hint="Mật khẩu"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,7 +160,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="15dp"
-        android:hint="Password reconfirm"
+        android:hint="Nhập lại mật khẩu"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -196,7 +196,7 @@
             android:id="@+id/text_view_sign_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
+            android:text="Đăng ký"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -211,7 +211,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_sign_up"
         app:layout_constraintVertical_bias="0.824"
-        tools:text="Already have an account? Login" />
+        tools:text="Bạn đã có tài khoản rồi? Đăng nhập tại đây" />
 
     <include
         android:id="@+id/layout_loading"

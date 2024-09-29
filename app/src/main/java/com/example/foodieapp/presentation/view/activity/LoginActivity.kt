@@ -93,9 +93,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun displayTextViewSignUp() {
         SpannableStringBuilder().apply {
-            append("Don't have an account? ")
+            append("Bạn chưa có tài khoản? ")
             append(SpannedUtils.setClickColorLink(
-                text = "Sign up here",
+                text = "Đăng ký tại đây",
                 context = this@LoginActivity,
                 onListenClick = onClickSignUp
             ))
